@@ -1,0 +1,418 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Otimizações críticas para performance de imagens */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  will-change: transform;
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 300px;
+}
+
+/* Preload crítico para imagens above-the-fold */
+.critical-image {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Lazy loading otimizado */
+img[loading="lazy"] {
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 300px;
+}
+
+/* Placeholder otimizado para carregamento */
+.image-placeholder {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 300px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Utility para truncar texto em múltiplas linhas */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Animações de bloqueio otimizadas */
+@keyframes lockPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes countdown {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-lock-pulse {
+  animation: lockPulse 2s ease-in-out infinite;
+}
+
+.animate-countdown {
+  animation: countdown 3s linear infinite;
+}
+
+/* Efeito de desbloqueio */
+@keyframes unlock {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-unlock {
+  animation: unlock 0.8s ease-out forwards;
+}
+
+/* Animação de revelação de conteúdo */
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-reveal {
+  animation: reveal 0.6s ease-out forwards;
+}
+
+/* Hover otimizado - Transições suaves e controladas */
+.hover-optimized {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-scale-small {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-scale-small:hover {
+  transform: scale(1.02);
+}
+
+/* Otimizações para dispositivos com movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .group-hover\:scale-110,
+  .group:hover .group-hover\:scale-105,
+  .hover\:scale-\[1\.02\]:hover,
+  .hover\:scale-105:hover,
+  .hover-scale:hover,
+  .hover-scale-small:hover {
+    transform: none;
+  }
+  
+  .transition-transform,
+  .hover-optimized,
+  .hover-scale,
+  .hover-scale-small {
+    transition: none;
+  }
+  
+  .animate-pulse,
+  .animate-spin,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-lock-pulse,
+  .animate-countdown,
+  .animate-unlock,
+  .animate-reveal,
+  .shimmer {
+    animation: none;
+  }
+}
+
+/* Otimizações específicas para mobile */
+@media (max-width: 640px) {
+  /* Reduzir transformações em mobile para performance */
+  .transform {
+    transform: none;
+  }
+  
+  .hover\:scale-\[1\.02\]:hover,
+  .hover-scale-small:hover {
+    transform: scale(1.01);
+  }
+  
+  /* Reduzir animações em mobile */
+  .group-hover\:scale-105,
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+  
+  .group-hover\:scale-110 {
+    transform: scale(1.03);
+  }
+  
+  /* Otimizar espaçamentos para mobile */
+  .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1.5rem;
+  }
+  
+  .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1rem;
+  }
+  
+  /* Reduzir blur effects em mobile para performance */
+  .blur-xl {
+    filter: blur(8px);
+  }
+  
+  .blur-2xl {
+    filter: blur(12px);
+  }
+  
+  /* Otimizar gradientes para mobile */
+  .bg-gradient-to-br {
+    background-attachment: scroll;
+  }
+  
+  /* Melhorar touch targets */
+  button, 
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Otimizar fontes para mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Melhorias para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .md\:space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 2rem;
+  }
+}
+
+/* Otimizações para telas grandes */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Melhorar acessibilidade */
+@media (prefers-contrast: high) {
+  .text-gray-400 {
+    color: #9ca3af;
+  }
+  
+  .text-gray-300 {
+    color: #d1d5db;
+  }
+  
+  .border-gray-700 {
+    border-color: #4b5563;
+  }
+}
+
+/* Focus states melhorados */
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Otimizar para dispositivos com notch */
+@supports (padding: max(0px)) {
+  .safe-area-inset-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-inset-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Otimizações de performance para imagens */
+@supports (content-visibility: auto) {
+  img[loading="lazy"] {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px 300px;
+  }
+}
+
+/* Melhoria de performance para backdrop-blur */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Otimização de GPU para transformações */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Otimizações para scroll em mobile */
+@media (max-width: 768px) {
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Melhorar performance de scroll */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+  
+  /* Otimizar sidebar para mobile */
+  .sidebar-mobile {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* Preload de recursos críticos */
+.preload-critical {
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 300px;
+}
+
+/* Otimização para Connection-Aware Loading */
+@media (prefers-reduced-data: reduce) {
+  .animate-pulse,
+  .animate-spin,
+  .animate-lock-pulse,
+  .animate-countdown {
+    animation-duration: 0.1s;
+  }
+  
+  .blur-xl,
+  .blur-2xl {
+    filter: none;
+  }
+  
+  .backdrop-blur-sm,
+  .backdrop-blur-xl {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Hover states otimizados para evitar conflitos */
+.card-hover {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Evitar zoom bugado em elementos aninhados */
+.nested-hover-fix {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.nested-hover-fix .hover-element {
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.nested-hover-fix:hover .hover-element {
+  transform: scale(1.05);
+}
+
+/* Otimização específica para cards de bônus */
+.bonus-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  backface-visibility: hidden;
+  will-change: transform, box-shadow, border-color;
+}
+
+.bonus-card:hover {
+  transform: translateY(-4px);
+}
+
+.bonus-card .bonus-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.bonus-card:hover .bonus-icon {
+  transform: scale(1.1) rotate(3deg);
+}

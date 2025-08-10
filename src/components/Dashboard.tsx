@@ -7,7 +7,7 @@ import { CofreDigitalPage } from './CofreDigitalPage';
 import { CentralIAsPage } from './CentralIAsPage';
 import { useAuth } from '../context/AuthContext';
 import { PRODUCTS } from '../data/products';
-import { MessageCircle, Menu, X, ExternalLink } from 'lucide-react';
+import { Instagram, Menu, X, ExternalLink } from 'lucide-react';
 
 export const Dashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('welcome');
@@ -335,12 +335,12 @@ export const Dashboard: React.FC = () => {
 
       {/* WhatsApp Support Button - Sempre visível */}
       <a
-        href="https://wa.me/554799658915?text=Quero%20acesso%20ao%20grupo%20Premium%20"
+        href="https://www.instagram.com/mente.expressofc/"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-14 md:h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110 z-30"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110 z-30"
       >
-        <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-white" />
+        <Instagram className="w-5 h-5 md:w-6 md:h-6 text-white" />
       </a>
     </div>
   );
